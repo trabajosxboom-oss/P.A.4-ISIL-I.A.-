@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juntos Contra el Dengue - Piura en Acción</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts: Inter & Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        warm: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                        },
+                        terracotta: {
+                            500: '#e05638',
+                            600: '#c84327',
+                            700: '#a8321b',
+                        },
+                        hopeGreen: {
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        title: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-banner {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.92) 0%, rgba(224, 86, 56, 0.95) 100%), 
+                        url('https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=1600') center/cover;
+        }
+        .tab-btn.active {
+            background-color: #f59e0b;
+            color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="bg-amber-50/50 text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Top Alert Banner -->
+    <div class="bg-terracotta-600 text-white text-xs md:text-sm py-2 px-4 text-center font-medium flex items-center justify-center gap-2">
+        <i data-lucide="alert-triangle" class="w-4 h-4 animate-bounce"></i>
+        <span><strong>Alerta Fenómeno El Niño en Piura:</strong> Las lluvias aumentan el riesgo de reproducción del zancudo <em>Aedes aegypti</em>. ¡Revisa tu patio hoy!</span>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-amber-200/60 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="switchSection('inicio')">
+                    <div class="bg-gradient-to-tr from-warm-600 to-terracotta-500 p-2.5 rounded-2xl shadow-md text-white">
+                        <i data-lucide="shield-alert" class="w-7 h-7"></i>
+                    </div>
+                    <div>
+                        <span class="font-title font-bold text-xl md:text-2xl text-slate-900 tracking-tight block leading-none">PiuraUnida</span>
+                        <span class="text-xs font-semibold text-terracotta-600 tracking-widest uppercase">Contra el Dengue</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Buttons -->
+                <nav class="hidden lg:flex items-center space-x-1 bg-amber-100/60 p-1.5 rounded-xl border border-amber-200/50">
+                    <button onclick="switchSection('inicio')" id="nav-inicio" class="tab-btn active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2">
+                        <i data-lucide="home" class="w-4 h-4"></i> Inicio
+                    </button>
+                    <button onclick="switchSection('prevencion')" id="nav-prevencion" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-warm-700 transition-all duration-200 flex items-center gap-2">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i> Prevención y Síntomas
+                    </button>
+                    <button onclick="switchSection('noticias')" id="nav-noticias" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-warm-700 transition-all duration-200 flex items-center gap-2">
+                        <i data-lucide="newspaper" class="w-4 h-4"></i> Noticias
+                    </button>
+                    <button onclick="switchSection('galeria')" id="nav-galeria" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-warm-700 transition-all duration-200 flex items-center gap-2">
+                        <i data-lucide="image" class="w-4 h-4"></i> Info & Fotos
+                    </button>
+                    <button onclick="switchSection('registro')" id="nav-registro" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-warm-700 transition-all duration-200 flex items-center gap-2">
+                        <i data-lucide="user-plus" class="w-4 h-4"></i> Voluntariado / Reporte
+                    </button>
+                </nav>
+
+                <!-- Action Button -->
+                <div class="hidden sm:flex items-center gap-3">
+                    <button onclick="switchSection('registro')" class="bg-terracotta-600 hover:bg-terracotta-700 text-white font-semibold text-sm px-4 py-2.5 rounded-xl shadow-md transition duration-200 flex items-center gap-2">
+                        <i data-lucide="heart-handshake" class="w-4 h-4"></i> Unirme a Ayuda
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 rounded-lg text-slate-700 hover:bg-amber-100 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden border-b border-amber-200 bg-white px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchSection('inicio'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-amber-100 flex items-center gap-2">
+                <i data-lucide="home" class="w-5 h-5 text-warm-600"></i> Inicio
+            </button>
+            <button onclick="switchSection('prevencion'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-amber-100 flex items-center gap-2">
+                <i data-lucide="shield-check" class="w-5 h-5 text-warm-600"></i> Prevención y Síntomas
+            </button>
+            <button onclick="switchSection('noticias'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-amber-100 flex items-center gap-2">
+                <i data-lucide="newspaper" class="w-5 h-5 text-warm-600"></i> Noticias
+            </button>
+            <button onclick="switchSection('galeria'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-amber-100 flex items-center gap-2">
+                <i data-lucide="image" class="w-5 h-5 text-warm-600"></i> Galería Informativa
+            </button>
+            <button onclick="switchSection('registro'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-amber-100 flex items-center gap-2">
+                <i data-lucide="user-plus" class="w-5 h-5 text-warm-600"></i> Voluntariado y Reportes
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Dynamic Container -->
+    <main class="flex-grow">
+
+        <!-- ================= SECCIÓN: INICIO ================= -->
+        <section id="sec-inicio" class="block">
+            <!-- Hero Banner -->
+            <div class="gradient-banner text-white py-12 md:py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+                <div class="max-w-4xl mx-auto text-center">
+                    <span class="inline-block bg-white/20 backdrop-blur-md text-amber-100 text-xs md:text-sm font-semibold px-4 py-1.5 rounded-full mb-4 border border-white/30">
+                        Región Piura • Respuesta Comunitaria Frente al Clima
+                    </span>
+                    <h1 class="font-title text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6 tracking-tight">
+                        Unidos contra el Dengue en tiempos del Fenómeno El Niño
+                    </h1>
+                    <p class="text-base sm:text-lg md:text-xl text-amber-50 max-w-2xl mx-auto mb-8 font-light leading-relaxed">
+                        Frente al incremento de lluvias y altas temperaturas en Piura, la solidaridad y la prevención familiar son nuestras mejores armas. Infórmate, reporta y protege a tu comunidad.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <button onclick="switchSection('prevencion')" class="bg-white text-terracotta-600 hover:bg-amber-50 font-bold px-7 py-3.5 rounded-xl shadow-lg transition-all duration-200 flex items-center justify-center gap-2">
+                            <i data-lucide="shield-alert" class="w-5 h-5"></i> ¿Cómo prevenir?
+                        </button>
+                        <button onclick="switchSection('registro')" class="bg-terracotta-700 hover:bg-terracotta-800 text-white font-bold px-7 py-3.5 rounded-xl shadow-lg transition-all duration-200 border border-terracotta-500/50 flex items-center justify-center gap-2">
+                            <i data-lucide="map-pin" class="w-5 h-5"></i> Reportar Foco / Voluntariado
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Context & Crisis in Piura Section -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="font-title text-2xl md:text-4xl font-bold text-slate-900 mb-3">La Situación en Nuestra Región</h2>
+                    <p class="text-slate-600 text-base md:text-lg">Las constantes precipitaciones en Sullana, Talara, Morropón y Piura ciudad generan estancamiento de agua, el hábitat perfecto para el mosquito transcriptor.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-amber-200/70 hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-warm-600 mb-5">
+                            <i data-lucide="cloud-rain" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-title font-bold text-xl text-slate-900 mb-2">Lluvias E Intra-domicilio</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            El Niño incrementa el estancamiento de agua en recipientes sin tapa, llantas, e infraestructuras afectadas.
+                        </p>
+                        <span class="text-xs font-semibold text-warm-700 bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200">Alto Riesgo Larvario</span>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-amber-200/70 hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-terracotta-600 mb-5">
+                            <i data-lucide="thermometer-sun" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-title font-bold text-xl text-slate-900 mb-2">Altas Temperaturas</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            El calor acelera el ciclo de reproducción del zancudo <em>Aedes aegypti</em>, acortando el tiempo de huevo a adulto.
+                        </p>
+                        <span class="text-xs font-semibold text-terracotta-600 bg-red-50 px-2.5 py-1 rounded-md border border-red-200">Reproducción Rápida</span>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-amber-200/70 hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-hopeGreen-600 mb-5">
+                            <i data-lucide="users" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-title font-bold text-xl text-slate-900 mb-2">Acción Veloz Vecinal</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            La fumigación y limpieza comunitaria organizada por los propios piuranos ha demostrado salvar vidas en cada brote.
+                        </p>
+                        <span class="text-xs font-semibold text-hopeGreen-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">Solución Comunitaria</span>
+                    </div>
+                </div>
+
+                <!-- Quick Emergency Contacts Grid -->
+                <div class="mt-16 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 p-6 md:p-8 rounded-3xl">
+                    <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-terracotta-600 text-white p-4 rounded-2xl">
+                                <i data-lucide="phone-call" class="w-8 h-8"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-title font-bold text-xl text-slate-900">¿Necesitas asistencia médica de emergencia?</h3>
+                                <p class="text-slate-600 text-sm">Líneas gratuitas de orientación en salud para Piura</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="https://www.gob.pe/555-recibir-informacion-y-orientacion-en-salud" target="_blank" class="bg-white border border-slate-200 hover:border-amber-400 px-4 py-2.5 rounded-xl shadow-sm font-semibold text-slate-800 text-sm flex items-center gap-2 transition">
+                                <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full"></span> Línea 113 MINSA (Opción 1)
+                            </a>
+                            <div class="bg-white border border-slate-200 px-4 py-2.5 rounded-xl shadow-sm font-semibold text-slate-800 text-sm flex items-center gap-2 cursor-default">
+                                <span class="w-2.5 h-2.5 bg-slate-400 rounded-full"></span> SAMU Piura - 106
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN: PREVENCIÓN Y SÍNTOMAS ================= -->
+        <section id="sec-prevencion" class="hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                
+                <!-- Section Title -->
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="font-title text-3xl md:text-4xl font-bold text-slate-900 mb-3">Guía Comunitaria de Prevención y Salud</h2>
+                    <p class="text-slate-600">Aprende a identificar los criaderos, eliminar larvas y reconocer los síntomas de alarma a tiempo.</p>
+                </div>
+
+                <!-- Tabs Internal (Prevencion vs Sintomas) -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    
+                    <!-- Box 1: Acciones Clave de Prevención -->
+                    <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-amber-200/80">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="bg-warm-100 p-3 rounded-2xl text-warm-700">
+                                <i data-lucide="shield-check" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="font-title font-bold text-2xl text-slate-900">4 Pasos para un Hogar Seguro</h3>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex gap-4 p-4 rounded-2xl bg-amber-50/60 border border-amber-100">
+                                <div class="bg-warm-600 text-white font-bold w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0">1</div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 mb-1">Lava, cepilla y tapa recipientes</h4>
+                                    <p class="text-sm text-slate-600">Cepilla los bordes de baldes, tanques y bidones donde guardas agua potable para eliminar los huevos pegados.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 p-4 rounded-2xl bg-amber-50/60 border border-amber-100">
+                                <div class="bg-warm-600 text-white font-bold w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0">2</div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 mb-1">Elimina inservibles tras las lluvias</h4>
+                                    <p class="text-sm text-slate-600">Desecha llantas viejas, botellas, cáscaras de coco o latas abandonadas en patios y techos de la vivienda.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 p-4 rounded-2xl bg-amber-50/60 border border-amber-100">
+                                <div class="bg-warm-600 text-white font-bold w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0">3</div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 mb-1">Reemplaza agua de floreros por arena húmeda</h4>
+                                    <p class="text-sm text-slate-600">Evita colocar agua estancada en floreros y maceteros tanto en casas como en cementerios locales.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 p-4 rounded-2xl bg-amber-50/60 border border-amber-100">
+                                <div class="bg-warm-600 text-white font-bold w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0">4</div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 mb-1">Usa repelente y mosquiteros</h4>
+                                    <p class="text-sm text-slate-600">Aplica repelente en piel expuesta cada 4 horas y coloca mallas metálicas o mosquiteros en camas de niños y ancianos.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Box 2: Síntomas y Alarma -->
+                    <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-red-200">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="bg-red-100 p-3 rounded-2xl text-terracotta-600">
+                                <i data-lucide="activity" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="font-title font-bold text-2xl text-slate-900">Reconoce los Síntomas</h3>
+                        </div>
+
+                        <div class="mb-6">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Síntomas Frecuentes</h4>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="p-3 rounded-xl border border-slate-200 flex items-center gap-2">
+                                    <i data-lucide="flame" class="w-5 h-5 text-amber-500"></i>
+                                    <span class="text-sm font-medium text-slate-800">Fiebre Alta</span>
+                                </div>
+                                <div class="p-3 rounded-xl border border-slate-200 flex items-center gap-2">
+                                    <i data-lucide="eye" class="w-5 h-5 text-amber-500"></i>
+                                    <span class="text-sm font-medium text-slate-800">Dolor de ojos</span>
+                                </div>
+                                <div class="p-3 rounded-xl border border-slate-200 flex items-center gap-2">
+                                    <i data-lucide="bone" class="w-5 h-5 text-amber-500"></i>
+                                    <span class="text-sm font-medium text-slate-800">Dolor articular</span>
+                                </div>
+                                <div class="p-3 rounded-xl border border-slate-200 flex items-center gap-2">
+                                    <i data-lucide="sparkles" class="w-5 h-5 text-amber-500"></i>
+                                    <span class="text-sm font-medium text-slate-800">Sarpullido / Sarna</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Alarm Warning Box -->
+                        <div class="bg-gradient-to-br from-red-500 to-terracotta-600 text-white p-5 rounded-2xl shadow-md">
+                            <div class="flex items-center gap-2 mb-2 font-title font-bold text-lg">
+                                <i data-lucide="alert-octagon" class="w-6 h-6"></i> SÍNTOMAS DE ALARMA (¡Ir al Hospital!)
+                            </div>
+                            <ul class="text-sm space-y-2 list-disc list-inside font-light text-red-50">
+                                <li>Dolor abdominal intenso y continuo.</li>
+                                <li>Vómitos persistentes o con sangre.</li>
+                                <li>Sangrado de encías, nariz o bajo la piel.</li>
+                                <li>Somnolencia extrema o irritabilidad.</li>
+                            </ul>
+                            <div class="mt-4 pt-3 border-t border-white/20 text-xs font-semibold text-amber-200">
+                                ⚠️ NUNCA SE AUTOMEDIQUE CON ASPIRINA O IBUPROFENO. Solo tome Paracetamol bajo indicación.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buscador de Centros de Salud en Piura -->
+                <div class="bg-slate-900 text-white p-6 sm:p-8 rounded-3xl shadow-xl">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                        <div>
+                            <h3 class="font-title font-bold text-xl md:text-2xl">Directorio de Puestos de Salud en Piura</h3>
+                            <p class="text-slate-400 text-sm">Busca el punto de atención o febriles más cercano a tu ubicación</p>
+                        </div>
+                        <div class="w-full md:w-72">
+                            <div class="relative">
+                                <input type="text" id="search-health" onkeyup="filterHealthCenters()" placeholder="Buscar por distrito o nombre..." class="w-full bg-slate-800 border border-slate-700 text-white text-sm rounded-xl pl-10 pr-4 py-2.5 focus:outline-none focus:border-warm-500">
+                                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3.5"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="health-centers-grid">
+                        <div class="health-card bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
+                            <span class="text-xs font-bold text-warm-500 uppercase">Piura Centro</span>
+                            <h4 class="font-bold text-white text-base mt-1">Hospital Santa Rosa</h4>
+                            <p class="text-xs text-slate-400 mt-1"><i data-lucide="map-pin" class="w-3 h-3 inline"></i> Av. Grau s/n, Piura</p>
+                            <span class="inline-block mt-3 text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Atención Febriles 24h</span>
+                        </div>
+                        <div class="health-card bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
+                            <span class="text-xs font-bold text-warm-500 uppercase">Castilla</span>
+                            <h4 class="font-bold text-white text-base mt-1">CESAMICA Castilla</h4>
+                            <p class="text-xs text-slate-400 mt-1"><i data-lucide="map-pin" class="w-3 h-3 inline"></i> Av. Ramon Castilla, Castilla</p>
+                            <span class="inline-block mt-3 text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Unidad Uviclin Activa</span>
+                        </div>
+                        <div class="health-card bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
+                            <span class="text-xs font-bold text-warm-500 uppercase">Sullana</span>
+                            <h4 class="font-bold text-white text-base mt-1">Hospital de Apoyo Sullana</h4>
+                            <p class="text-xs text-slate-400 mt-1"><i data-lucide="map-pin" class="w-3 h-3 inline"></i> Av. Santa Rosa 485, Sullana</p>
+                            <span class="inline-block mt-3 text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Emergencias Dengue</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN: NOTICIAS Y CANALES EN VIVO ================= -->
+        <section id="sec-noticias" class="hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <span class="bg-red-100 text-terracotta-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Información Directa y Reportajes</span>
+                    <h2 class="font-title text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-3">Noticias y Cobertura Informativa de Canales</h2>
+                    <p class="text-slate-600">Accede a las últimas noticias, reportajes periodísticos y comunicados oficiales sobre la situación del dengue en Piura.</p>
+                </div>
+
+                <!-- Live / News Channels Grid -->
+                <h3 class="font-title font-bold text-xl text-slate-900 mb-6 flex items-center gap-2">
+                    <span class="w-3 h-3 bg-red-500 rounded-full animate-ping"></span> Reportajes e Informes de Canales de Noticias
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <!-- TVPerú Noticias -->
+                    <div class="bg-white rounded-2xl border border-amber-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div class="h-44 bg-slate-800 relative flex items-center justify-center">
+                                <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover opacity-60" alt="TVPerú Noticias">
+                                <span class="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-md flex items-center gap-1">
+                                    <i data-lucide="radio" class="w-3 h-3"></i> TVPERÚ NOTICIAS
+                                </span>
+                            </div>
+                            <div class="p-5">
+                                <h4 class="font-title font-bold text-lg text-slate-900 mb-2 leading-snug">DIRESA Piura refuerza acciones de prevención y control del dengue</h4>
+                                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                    Reporte oficial sobre las campañas de abatización y despliegue de brigadas de salud en los distritos con mayor incidencia de la región.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-5 pt-0">
+                            <a href="https://www.tvperu.gob.pe/noticias/nacionales/diresa-piura-refuerza-las-acciones-de-prevencion-y-control-del-dengue-en" target="_blank" class="w-full text-center bg-amber-500 hover:bg-amber-600 text-white font-semibold text-sm py-2.5 rounded-xl inline-flex items-center justify-center gap-2 transition shadow-sm">
+                                Leer en TVPerú Noticias <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- RPP Noticias -->
+                    <div class="bg-white rounded-2xl border border-amber-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div class="h-44 bg-slate-800 relative flex items-center justify-center">
+                                <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover opacity-60" alt="RPP Noticias">
+                                <span class="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-md flex items-center gap-1">
+                                    <i data-lucide="newspaper" class="w-3 h-3"></i> RPP NOTICIAS
+                                </span>
+                            </div>
+                            <div class="p-5">
+                                <h4 class="font-title font-bold text-lg text-slate-900 mb-2 leading-snug">Crítica a la gestión sanitaria ante colapso de camas UCI por dengue</h4>
+                                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                    Informe sobre la capacidad de respuesta hospitalaria en Piura y las declaraciones del Congreso exigiendo medidas urgentes de salud pública.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-5 pt-0">
+                            <a href="https://rpp.pe/politica/congreso/miguel-huaman-critica-gestion-sanitaria-ante-colapso-de-camas-uci-por-dengue-algo-esta-fallando-o-la-cabeza-esta-dirigiendo-mal-noticia-1719692" target="_blank" class="w-full text-center bg-amber-500 hover:bg-amber-600 text-white font-semibold text-sm py-2.5 rounded-xl inline-flex items-center justify-center gap-2 transition shadow-sm">
+                                Leer noticia en RPP <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- ATV Noticias -->
+                    <div class="bg-white rounded-2xl border border-amber-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div class="h-44 bg-slate-800 relative flex items-center justify-center">
+                                <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover opacity-60" alt="ATV Noticias">
+                                <span class="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-md flex items-center gap-1">
+                                    <i data-lucide="tv" class="w-3 h-3"></i> ATV NOTICIAS
+                                </span>
+                            </div>
+                            <div class="p-5">
+                                <h4 class="font-title font-bold text-lg text-slate-900 mb-2 leading-snug">Piura: Diez fallecidos a causa del dengue en la región</h4>
+                                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                    Cobertura informativa sobre el balance de víctimas mortales registradas y las alertas sanitarias emitidas en las provincias del norte.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-5 pt-0">
+                            <a href="https://www.atv.pe/noticia/piura-diez-fallecidos-dengue/" target="_blank" class="w-full text-center bg-amber-500 hover:bg-amber-600 text-white font-semibold text-sm py-2.5 rounded-xl inline-flex items-center justify-center gap-2 transition shadow-sm">
+                                Leer noticia en ATV <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comunicados Oficiales Destacados -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-amber-200 shadow-sm">
+                    <h3 class="font-title font-bold text-xl text-slate-900 mb-6 flex items-center gap-2">
+                        <i data-lucide="bell" class="w-5 h-5 text-warm-600"></i> Comunicados Institucionales Oficiales
+                    </h3>
+
+                    <div class="space-y-4">
+                        <a href="https://www.gob.pe/institucion/minsa/noticias/32540-diresa-realizara-jornadas-de-fumigacion-en-siete-zonas-de-piura" target="_blank" class="block p-5 rounded-2xl hover:bg-amber-50/70 border border-slate-100 hover:border-amber-200 transition group">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                                <div>
+                                    <span class="text-xs font-bold text-terracotta-600 uppercase tracking-wider">DIRESA PIURA • COMUNICADO OFICIAL</span>
+                                    <h4 class="font-bold text-slate-900 group-hover:text-terracotta-600 transition text-base mt-1">DIRESA realizará jornadas de fumigación en siete zonas de Piura</h4>
+                                    <p class="text-xs text-slate-600 mt-1">Conoce los detalles de las intervenciones casa por casa para erradicar el zancudo vector.</p>
+                                </div>
+                                <span class="text-xs font-semibold text-terracotta-600 group-hover:text-terracotta-700 flex items-center gap-1 flex-shrink-0 bg-amber-100/70 px-3 py-1.5 rounded-lg">
+                                    Ver Comunicado <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN: GALERÍA E INFORMACIÓN GRÁFICA ================= -->
+        <section id="sec-galeria" class="hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="font-title text-3xl md:text-4xl font-bold text-slate-900 mb-3">Galería Informativa y de Campo</h2>
+                    <p class="text-slate-600">Imágenes y material educativo sobre las campañas de control vectorial, abatización e impacto del clima en Piura.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Photo 1 -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-amber-200/70 shadow-sm hover:shadow-lg transition">
+                        <div class="h-52 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover hover:scale-105 transition duration-300" alt="Atención médica">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs font-bold text-warm-600 uppercase">Campañas de Salud</span>
+                            <h4 class="font-title font-bold text-lg text-slate-900 mt-1 mb-2">Atención Temprana de Pacientes</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">Equipos de salud evaluando a familias en Piura ante los primeros síntomas de fiebre.</p>
+                        </div>
+                    </div>
+
+                    <!-- Photo 2 -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-amber-200/70 shadow-sm hover:shadow-lg transition">
+                        <div class="h-52 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover hover:scale-105 transition duration-300" alt="Agua estancada">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs font-bold text-terracotta-600 uppercase">Impacto Fenómeno El Niño</span>
+                            <h4 class="font-title font-bold text-lg text-slate-900 mt-1 mb-2">Eliminación de Charcos</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">Trabajo comunitario para drenar agua de lluvia estancada en las calles y avenidas piuranas.</p>
+                        </div>
+                    </div>
+
+                    <!-- Photo 3 -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-amber-200/70 shadow-sm hover:shadow-lg transition">
+                        <div class="h-52 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover hover:scale-105 transition duration-300" alt="Voluntariado">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs font-bold text-hopeGreen-600 uppercase">Organización Vecinal</span>
+                            <h4 class="font-title font-bold text-lg text-slate-900 mt-1 mb-2">Brigadas de Voluntarios</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">Jóvenes piuranos apoyando en la concientización casa por casa sobre el uso del larvicida.</p>
+                        </div>
+                    </div>
+
+                    <!-- Photo 4 -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-amber-200/70 shadow-sm hover:shadow-lg transition">
+                        <div class="h-52 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover hover:scale-105 transition duration-300" alt="Prevención e Hidratación">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs font-bold text-warm-600 uppercase">Cuidados Médicos</span>
+                            <h4 class="font-title font-bold text-lg text-slate-900 mt-1 mb-2">Hidratación Oral Constante</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">El suero y el consumo continuo de líquidos son vitales para prevenir complicaciones graves.</p>
+                        </div>
+                    </div>
+
+                    <!-- Photo 5 -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-amber-200/70 shadow-sm hover:shadow-lg transition">
+                        <div class="h-52 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover hover:scale-105 transition duration-300" alt="Fumigación de zonas">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs font-bold text-terracotta-600 uppercase">Control Vectorial</span>
+                            <h4 class="font-title font-bold text-lg text-slate-900 mt-1 mb-2">Fumigación de Sectores</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">Apertura de puertas a los fumadores autorizados del MINSA en los distritos de Piura.</p>
+                        </div>
+                    </div>
+
+                    <!-- Photo 6 -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-amber-200/70 shadow-sm hover:shadow-lg transition">
+                        <div class="h-52 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover hover:scale-105 transition duration-300" alt="Investigación">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs font-bold text-hopeGreen-600 uppercase">Supervisión Técnica</span>
+                            <h4 class="font-title font-bold text-lg text-slate-900 mt-1 mb-2">Muestreo de Larvas</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">Monitoreo periódico del índice aédico en los depósitos de agua familiares.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN: REGISTRO Y VOLUNTARIADO ================= -->
+        <section id="sec-registro" class="hidden">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                
+                <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-amber-200">
+                    <div class="text-center max-w-2xl mx-auto mb-8">
+                        <div class="w-14 h-14 bg-gradient-to-tr from-warm-500 to-terracotta-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-md">
+                            <i data-lucide="heart-handshake" class="w-7 h-7"></i>
+                        </div>
+                        <h2 class="font-title text-3xl font-bold text-slate-900">Registro Comunitario y Voluntariado</h2>
+                        <p class="text-slate-600 text-sm mt-2">Únete a la red de prevención de Piura. Puedes sumarte como voluntario o solicitar apoyo de desinfección/fumigación en tu sector.</p>
+                    </div>
+
+                    <!-- Formulario -->
+                    <form id="communityForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                        
+                        <!-- Tipo de Registro -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-700 mb-2">¿En qué consiste tu registro?</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <label class="border border-amber-200 p-3 rounded-xl flex items-center gap-2 cursor-pointer hover:bg-amber-50">
+                                    <input type="radio" name="tipoRegistro" value="voluntario" checked class="text-warm-600 focus:ring-warm-500">
+                                    <span class="text-sm font-medium text-slate-800">Quiero ser Voluntario</span>
+                                </label>
+                                <label class="border border-amber-200 p-3 rounded-xl flex items-center gap-2 cursor-pointer hover:bg-amber-50">
+                                    <input type="radio" name="tipoRegistro" value="foco" class="text-warm-600 focus:ring-warm-500">
+                                    <span class="text-sm font-medium text-slate-800">Reportar Foco / Criadero</span>
+                                </label>
+                                <label class="border border-amber-200 p-3 rounded-xl flex items-center gap-2 cursor-pointer hover:bg-amber-50">
+                                    <input type="radio" name="tipoRegistro" value="fumigacion" class="text-warm-600 focus:ring-warm-500">
+                                    <span class="text-sm font-medium text-slate-800">Solicitar Fumigación</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Datos Personales -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Nombre Completo *</label>
+                                <input type="text" required placeholder="Ej. Rosa Maria Morales" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-warm-500 focus:bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Teléfono de Contacto (WhatsApp) *</label>
+                                <input type="tel" required placeholder="987 654 321" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-warm-500 focus:bg-white">
+                            </div>
+                        </div>
+
+                        <!-- Ubicación en Piura -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Distrito de Piura *</label>
+                                <select required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-warm-500 focus:bg-white">
+                                    <option value="">Selecciona distrito...</option>
+                                    <option value="piura">Piura Centro</option>
+                                    <option value="castilla">Castilla</option>
+                                    <option value="veintiseis">Veintiséis de Octubre</option>
+                                    <option value="sullana">Sullana</option>
+                                    <option value="catacaos">Catacaos</option>
+                                    <option value="morropon">Morropón / Chulucanas</option>
+                                    <option value="talara">Talara</option>
+                                    <option value="otro">Otro sector</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Urbanización / AA.HH / Dirección *</label>
+                                <input type="text" required placeholder="Ej. AA.HH. Los Polvorines Manzana F" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-warm-500 focus:bg-white">
+                            </div>
+                        </div>
+
+                        <!-- Detalles Adicionales -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Detalles de la solicitud o disponibilidad</label>
+                            <textarea rows="3" placeholder="Describe brevemente el foco de mosquitos o tu disponibilidad como voluntario..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-warm-500 focus:bg-white"></textarea>
+                        </div>
+
+                        <!-- Checkbox términos -->
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" required id="terms" class="rounded border-slate-300 text-warm-600 focus:ring-warm-500">
+                            <label for="terms" class="text-xs text-slate-600">Confirmo la veracidad de los datos entregados para la coordinación vecinal.</label>
+                        </div>
+
+                        <!-- Botón Enviar -->
+                        <button type="submit" class="w-full bg-gradient-to-r from-warm-600 to-terracotta-600 hover:from-warm-700 hover:to-terracotta-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2">
+                            <i data-lucide="send" class="w-5 h-5"></i> Enviar Registro de Ayuda
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal de Confirmación de Formulario -->
+    <div id="confirmationModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center shadow-2xl border border-amber-200">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="check-circle-2" class="w-10 h-10"></i>
+            </div>
+            <h3 class="font-title font-bold text-2xl text-slate-900 mb-2">¡Registro Recibido!</h3>
+            <p class="text-sm text-slate-600 mb-6">Gracias por colaborar con la comunidad de Piura. Los coordinadores de zona te contactarán a la brevedad vía WhatsApp o llamada.</p>
+            <button onclick="closeModal()" class="w-full bg-warm-600 hover:bg-warm-700 text-white font-bold py-3 rounded-xl transition">
+                Entendido
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-amber-900/30 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="bg-warm-600 text-white p-1.5 rounded-lg">
+                            <i data-lucide="shield-alert" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-title font-bold text-xl text-white">PiuraUnida</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Iniciativa ciudadana e comunitaria para mitigar el impacto del dengue producido por lluvias del Fenómeno El Niño en la región Piura.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-title font-semibold text-white text-sm uppercase tracking-wider mb-3">Secciones Rápidas</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" onclick="switchSection('inicio')" class="hover:text-amber-400">Inicio y Diagnóstico</a></li>
+                        <li><a href="#" onclick="switchSection('prevencion')" class="hover:text-amber-400">Síntomas y Prevención</a></li>
+                        <li><a href="#" onclick="switchSection('noticias')" class="hover:text-amber-400">Noticias y Canales Informativos</a></li>
+                        <li><a href="#" onclick="switchSection('registro')" class="hover:text-amber-400">Solicitar Fumigación o Voluntariado</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-title font-semibold text-white text-sm uppercase tracking-wider mb-3">Números Útiles</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li>MINSA (Salud): <a href="https://www.gob.pe/555-recibir-informacion-y-orientacion-en-salud" target="_blank" class="underline text-amber-300">113 (Opción 1)</a></li>
+                        <li>SAMU Emergencias Piura: <strong class="text-white">106</strong></li>
+                        <li>COER Piura (Defensa Civil): <strong class="text-white">(073) 308470</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
+                © Plataforma de Ayuda Comunitaria - Región Piura. Juntos superaremos la emergencia sanitaria.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logic Scripting -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Switch Tabs Function
+        function switchSection(sectionId) {
+            // Hide all sections
+            const sections = ['inicio', 'prevencion', 'noticias', 'galeria', 'registro'];
+            sections.forEach(sec => {
+                const el = document.getElementById(`sec-${sec}`);
+                if (el) el.classList.add('hidden');
+                
+                const navBtn = document.getElementById(`nav-${sec}`);
+                if (navBtn) {
+                    navBtn.classList.remove('active');
+                    navBtn.classList.add('text-slate-700');
+                }
+            });
+
+            // Show selected section
+            const activeSec = document.getElementById(`sec-${sectionId}`);
+            if (activeSec) {
+                activeSec.classList.remove('hidden');
+            }
+
+            // Highlight nav button
+            const activeBtn = document.getElementById(`nav-${sectionId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+                activeBtn.classList.remove('text-slate-700');
+            }
+
+            // Scroll top smooth
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle Mobile Navigation
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Health Center Filter Search
+        function filterHealthCenters() {
+            const query = document.getElementById('search-health').value.toLowerCase();
+            const cards = document.querySelectorAll('.health-card');
+
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Form Submission Modal Handle
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const modal = document.getElementById('confirmationModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.getElementById('communityForm').reset();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('confirmationModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    </script>
+</body>
+</html>
